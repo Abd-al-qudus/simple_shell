@@ -2,9 +2,7 @@
 
 /**
 * _putchar - write single char to stdout
-*
 * @c: char to write
-*
 * Return: char to stdout
 */
 
@@ -15,9 +13,7 @@ int _putchar(char c)
 
 /**
 * _puts - prints string to stdout
-*
 * @str: string to print
-*
 * Return: void
 */
 

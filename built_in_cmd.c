@@ -4,9 +4,7 @@
 
 /**
 * get_arg_list_length - get the length of argv
-*
 * @argv: list to conpute length
-*
 * Return: num of argument
 */
 
@@ -56,10 +54,9 @@ int _atoi(char *s)
 
 /**
 * eval_built_in - check whether a command is built in
-*
 * @cmd: command to check
-* @arg: argument
-*
+* @argl: argument vector
+* environ: environment variables
 * Return: 1 on success, -1 on failure
 */
 
@@ -125,9 +122,7 @@ int eval_built_in(char *cmd, char **argl, char **environ)
 
 /**
 * exitHandler - handle exit with or without argument
-*
 * @arg: exit argument
-*
 * return: void
 */
 

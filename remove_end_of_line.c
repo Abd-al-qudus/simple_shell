@@ -2,9 +2,7 @@
 
 /**
 * remove_end_of_line - remove the trailing spaces
-*
 * @line: input to remove trailing spaces
-*
 * Return: void
 */
 

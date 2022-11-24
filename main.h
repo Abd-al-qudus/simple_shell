@@ -18,6 +18,7 @@
 #define EXIT_SUCCESS 0
 #define EXIT_FAILURE 1
 
+int checkLogical(char **argToken, char **environ, char path[15][15]);
 int executeMultiCommand(char **argv, char **environ, char path[15][15]);
 char **checkDelim(char *buffer, const char *delim);
 void freeCmd(char **cmdArray, int len);

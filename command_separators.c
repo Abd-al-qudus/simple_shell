@@ -42,9 +42,7 @@ char **checkDelim(char *cmd, const char *delim)
 
 /**
 * freeCmd - free command list array
-*
 * @cmdArray: command array
-*
 * Return: void
 */
 
@@ -67,27 +65,80 @@ void freeCmd(char **cmdArray, int len)
 int executeMultiCommand(char **argv, char **environ, char path[15][15])
 {
 	char **tokenArgs, *env;
-	int count, i;
+	int i, cmd;
 
-	count = get_arg_list_length(argv);
-	for (i = 0; i < count; i++)
+	cmd = 0, i = 0;
+	for (i = 0; i < get_arg_list_length(argv); i++)
 	{
+		printf("[*] Arg passed %s\n", argv[i]);
+		printf("[*] Arg passed next %s\n", argv[i + 1]);
 		tokenArgs = checkDelim(argv[i], " ");
-		env = scan_list(path, tokenArgs[0]);
+		printf("[*] inExecMUL %s\n", tokenArgs[i]);
+		printf("[*] inExecMUL next %s\n", tokenArgs[i + 1]);
+		if (tokenArgs[i] == NULL)
+			env = scan_list(path, strtok(argv[i], " "));
+		else
+			env = scan_list(path, tokenArgs[i]);
 		if (env == NULL)
 		{
-			_puts(tokenArgs[0]);
+			_puts(tokenArgs[i]);
 			_puts(": No such command\n");
 			freeCmd(tokenArgs, get_arg_list_length(tokenArgs));
-			free(env);
+			return (-1);
 		}
 		else
 		{
-			execute(environ, env, tokenArgs);
+			printf("[*] bef execute %s\n", tokenArgs[i]);
+			printf("[*] bef execute next %s\n", tokenArgs[i + 1]);
+			printf("[*] buffer %s\n", env);
+			cmd = execute(environ, env, tokenArgs);
+			if (cmd == -1)
+			{
+				freeCmd(tokenArgs, get_arg_list_length(tokenArgs));
+				free(env);
+				return (cmd);
+			}
 			freeCmd(tokenArgs, get_arg_list_length(tokenArgs));
 			free(env);
 		}
-
 	}
-	return (count);
+	return (cmd);
+}
+
+/**
+* checkLogical - check logical operators
+* @argToken: list of arguments
+* @environ: environment variables
+* @path: command path
+* Return: sub token vector
+*/
+
+int checkLogical(char **argToken, char **environ, char path[15][15])
+{
+	char **orSubToken, **andSubToken;
+	int i, k;
+
+	for (k = 0; k < get_arg_list_length(argToken); k++)
+	{
+		printf("[*] before delim or %s\n", argToken[k]);
+		orSubToken = checkDelim(argToken[k], "||");
+		printf("[*] after delim or %s\n", orSubToken[k]);
+		for (i = 0; i < get_arg_list_length(orSubToken); i++)
+		{
+			int cmd;
+
+			printf("[*] before delim amper %s\n", orSubToken[i]);
+			andSubToken = checkDelim(orSubToken[i], "&&");
+			printf("[*] after delim %s\n", andSubToken[i]);
+			/*for (j = 0; j < get_arg_list_length(andSubToken); j++)*/
+			cmd = executeMultiCommand(andSubToken, environ, path);
+			if (cmd == -1)
+			{
+				;
+			}
+			freeCmd(andSubToken, get_arg_list_length(andSubToken));
+		}
+		freeCmd(orSubToken, get_arg_list_length(orSubToken));
+	}
+	return (k);
 }

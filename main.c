@@ -5,9 +5,7 @@
 
 /**
 * main - call other function
-*
 * @environ: env variables
-*
 * Return: Always 0
 */
 
@@ -36,26 +34,10 @@ int main(int ac __attribute__((unused)), char **av  __attribute__((unused)), cha
 		check = eval_built_in(buffer, agv, environ);
 		if (check == -1)
 		{
-			newp = executeMultiCommand(agv, environ, path);
+			newp = checkLogical(agv, environ, path);
 			if (newp != -1)
 				newp = 0;
 			freeCmd(agv, get_arg_list_length(agv));
-			/*env = scan_list(path, buffer);
-			if (env == NULL)
-			{
-				printf("%s: No such command\n", agv[0]);
-				freeCmd(agv, get_arg_list_length(agv));
-				free(env);
-			}
-			else
-			{
-				execute(environ, env, agv);
-				newp = executeMultiCommand(agv, environ);
-				if (newp != -1)
-					newp = 0;
-				freeCmd(agv, get_arg_list_length(agv));
-				free(env);
-			}*/
 		}
 	}
 	return (0);
@@ -64,11 +46,9 @@ int main(int ac __attribute__((unused)), char **av  __attribute__((unused)), cha
 
 /**
 * execute - execute a process
-*
 * @environ: environment variables
 * @buffer: memory
 * @av: argument vector
-*
 * Return: 0 on success, errno is set
 */
 
@@ -88,7 +68,7 @@ int execute(char **environ, char *buffer, char **av)
 		{
 			_puts(av[0]);
 			_puts(": execution failed\n");
-			exit(1);
+			exit(run_cmd);
 		}
 	}
 	wait(NULL);
@@ -115,9 +95,7 @@ void sigintHandler(int sigint)
 
 /**
 * sigstpHandler - handle suspension signal
-*
 * @sigstp: signal to handle
-*
 * Return: void
 */
 

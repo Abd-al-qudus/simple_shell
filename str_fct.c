@@ -2,9 +2,7 @@
 
 /**
 * _strlen - get the length of a string
-*
 * @str: string to iterate
-*
 * Return: string length
 */
 
@@ -19,9 +17,7 @@ int _strlen(char *str)
 
 /**
 * _strdup - duplicate a string to another
-*
 * @src: string to duplicate
-*
 * Return: pointer to the duplicate
 */
 
@@ -47,10 +43,8 @@ char *_strdup(char *src)
 
 /**
 * _strcmp - compare strings
-*
 * @src1: first string
 * @src2: second string
-*
 * Return: 0 on success and -1 otherwise
 */
 
@@ -78,10 +72,8 @@ int _strcmp(char *src1, char *src2)
 
 /**
 * _strtok - tokenize string and return tokens
-*
 * @str: string to tokenize
 * @delim: interval to break
-*
 * Return: tokens always
 */
 
@@ -128,10 +120,8 @@ char *_strtok(char *str, const char *delim)
 
 /**
 * _strcat - concatenates strings
-*
 * @str1: string 1
 * @str2: string 2
-*
 * Return: pointer sto str1
 */
 

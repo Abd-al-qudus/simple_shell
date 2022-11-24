@@ -5,11 +5,9 @@
 
 /**
 * _getline - read input from stdin
-*
 * @buffer: memory to store input
 * @size: size of buffer to read
 * @stream: file stream
-*
 * Return: numbers of byte read
 */
 

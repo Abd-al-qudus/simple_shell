@@ -20,9 +20,7 @@ int setEnvHandler(char *name, char *value, int overwrite)
 
 /**
 * unsetEnvHandler - unset environment variable
-*
 * @name: variable to unset
-*
 * Return: int on success or failure
 */
 
