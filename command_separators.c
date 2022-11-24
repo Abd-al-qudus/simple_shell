@@ -1,6 +1,6 @@
 #include "main.h"
-#define MAX_CMD 1024
-#define MAX_CMD_LEN 1024
+#define MAX_CMD 50
+#define MAX_CMD_LEN 2048
 /**
 * checkSemiColon - check command for semi colon
 * @cmd: input command
@@ -71,7 +71,6 @@ int executeMultiCommand(char **argv, char **environ, char path[15][15])
 	for (i = 0; i < get_arg_list_length(argv); i++)
 	{
 		tokenArgs = checkDelim(argv[i], " ");
-		printf("tk[0] %s\n", tokenArgs[0]);
 		if (tokenArgs[i] == NULL)
 			env = scan_list(path, strtok(tokenArgs[0], " "));
 		else
@@ -86,7 +85,6 @@ int executeMultiCommand(char **argv, char **environ, char path[15][15])
 		}
 		else
 		{
-			printf("[*] %s\n", env);
 			cmd = execute(environ, env, tokenArgs);
 			if (cmd == -1)
 			{

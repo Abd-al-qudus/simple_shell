@@ -1,6 +1,6 @@
 #include "main.h"
-#define MAX_ARGV_SIZE 20
-#define MAX_BUFFER_SIZE 4096
+#define MAX_ARGV_SIZE 30
+#define MAX_BUFFER_SIZE 2046
 
 
 /**
