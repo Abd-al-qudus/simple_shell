@@ -71,10 +71,11 @@ int executeMultiCommand(char **argv, char **environ, char path[15][15])
 	for (i = 0; i < get_arg_list_length(argv); i++)
 	{
 		tokenArgs = checkDelim(argv[i], " ");
+		printf("tk[0] %s\n", tokenArgs[0]);
 		if (tokenArgs[i] == NULL)
-			env = scan_list(path, strtok(argv[i], " "));
+			env = scan_list(path, strtok(tokenArgs[0], " "));
 		else
-			env = scan_list(path, tokenArgs[i]);
+			env = scan_list(path, tokenArgs[0]);
 		if (env == NULL)
 		{
 			_puts(tokenArgs[0]);
@@ -85,6 +86,7 @@ int executeMultiCommand(char **argv, char **environ, char path[15][15])
 		}
 		else
 		{
+			printf("[*] %s\n", env);
 			cmd = execute(environ, env, tokenArgs);
 			if (cmd == -1)
 			{
@@ -121,7 +123,6 @@ int checkLogical(char **argToken, char **environ, char path[15][15])
 
 			andSubToken = checkDelim(orSubToken[i], "&&");
 			cmd = executeMultiCommand(andSubToken, environ, path);
-			printf("[%d] ANDSUB %s code %d\n", i, andSubToken[i], cmd);
 			if (cmd == -1)
 			{
 				;
